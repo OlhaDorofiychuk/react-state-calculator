@@ -1,14 +1,17 @@
 import { useState } from "react";
+//State
 function Calculator() {
   const [NumberOne, setInputOne] = useState("0");
   const [NumberTwo, setInputTwo] = useState("0");
   const [Operation, setOperation] = useState("+");
-  let [Result, setResult] = useState("0");
+  const [Result, setResult] = useState("0");
   const [StoreResult, setStoreResult] = useState("");
+
+  // multinumber function alows us to have multidigit number. It takes 3 paramenters, which represent: setInput and number from state along with a value of the button
   const multiNumber = (numberSetInput, number, newNum) => {
-    if (number === "0") {
-      // && number[1])!=='.')
-      // && !number.includes(".")
+    // if (number.includes(".") && newNum !== ".") {
+    //   numberSetInput(number.splice(newNum));
+    if (number === "0" && newNum !== ".") {
       numberSetInput(newNum);
     } else {
       numberSetInput(number + newNum);
@@ -17,21 +20,15 @@ function Calculator() {
 
   const CalculateResult = () => {
     const allOperators = {
-      "+": parseInt(NumberOne) + parseInt(NumberTwo),
-      "-": parseInt(NumberOne) - parseInt(NumberTwo),
-      "*": parseInt(NumberOne) * parseInt(NumberTwo),
-      "÷": parseInt(NumberOne) / parseInt(NumberTwo),
+      "+": Number.parseFloat(NumberOne) + Number.parseFloat(NumberTwo),
+      "-": Number.parseFloat(NumberOne) - Number.parseFloat(NumberTwo),
+      "*": Number.parseFloat(NumberOne) * Number.parseFloat(NumberTwo),
+      "÷": Number.parseFloat(NumberOne) / Number.parseFloat(NumberTwo),
     };
 
     setResult(allOperators[Operation]);
   };
 
-  const Recall = () => {};
-  //   setResult = () => {
-  //     if (Result.length > 6) {
-  //       Number.parseFloat(Result).toFixed(5);
-  //     }
-  //   };
   return (
     <div className="calculator">
       <div className="panel">
@@ -71,7 +68,7 @@ function Calculator() {
           <button onClick={() => multiNumber(setInputOne, NumberOne, ".")}>
             .
           </button>
-          <button onClick={() => StoreResult}>Recall</button>
+          <button onClick={() => setInputOne(Result)}>Recall</button>
         </div>
       </div>
 
@@ -122,7 +119,7 @@ function Calculator() {
           <button onClick={() => multiNumber(setInputTwo, NumberTwo, ".")}>
             .
           </button>
-          <button onClick={() => StoreResult}>Recall</button>
+          <button onClick={() => setInputTwo(Result)}>Recall</button>
         </div>
       </div>
       <div className="panel answer">
