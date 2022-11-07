@@ -9,8 +9,9 @@ function Calculator() {
 
   // multinumber function alows us to have multidigit number. It takes 3 paramenters, which represent: setInput and number from state along with a value of the button
   const multiNumber = (numberSetInput, number, newNum) => {
-    // if (number.includes(".") && newNum !== ".") {
-    //   numberSetInput(number.splice(newNum));
+    if (number.includes(".") && newNum === ".") {
+      return
+    }
     if (number === "0" && newNum !== ".") {
       numberSetInput(newNum);
     } else {
